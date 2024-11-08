@@ -1,0 +1,20 @@
+{
+  "name": "Python & C Development Container",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": [
+        "ms-python.python",
+        "ms-vscode.cpptools"
+      ]
+    }
+  },
+  "forwardPorts": [5680],
+  "mounts": [
+    "source=C:/Users/J/Projects/pyAgent_C4,target=/pyAgent_C4,type=bind,consistency=cached"
+  ],
+  "remoteUser": "root"
+}

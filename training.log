@@ -1,0 +1,208 @@
+/workspaces/pyAgent_C4/train_alphazero.py:125: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  agent.model.load_state_dict(torch.load("alphazero_model.pth"))
+2024-11-08 00:11:39,519 INFO:Loaded saved model from alphazero_model.pth.
+2024-11-08 00:11:39,520 INFO:Simulation started.
+2024-11-08 00:12:10,832 WARNING:Episode 0 - Incomplete data. Skipping training.
+2024-11-08 00:12:10,832 INFO:Moving to Episode 1
+2024-11-08 00:13:38,330 WARNING:Episode 1 - Incomplete data. Skipping training.
+2024-11-08 00:13:38,331 INFO:Moving to Episode 2
+2024-11-08 00:14:02,252 WARNING:Episode 2 - Incomplete data. Skipping training.
+2024-11-08 00:14:02,253 INFO:Moving to Episode 3
+2024-11-08 00:14:29,247 WARNING:Episode 3 - Incomplete data. Skipping training.
+2024-11-08 00:14:29,248 INFO:Moving to Episode 4
+2024-11-08 00:14:56,327 WARNING:Episode 4 - Incomplete data. Skipping training.
+2024-11-08 00:14:56,328 INFO:Moving to Episode 5
+2024-11-08 00:15:51,167 WARNING:Episode 5 - Incomplete data. Skipping training.
+2024-11-08 00:15:51,167 INFO:Moving to Episode 6
+2024-11-08 00:16:25,074 WARNING:Episode 6 - Incomplete data. Skipping training.
+2024-11-08 00:16:25,074 INFO:Moving to Episode 7
+2024-11-08 00:17:01,758 WARNING:Episode 7 - Incomplete data. Skipping training.
+2024-11-08 00:17:01,758 INFO:Moving to Episode 8
+2024-11-08 00:17:44,820 WARNING:Episode 8 - Incomplete data. Skipping training.
+2024-11-08 00:17:44,820 INFO:Moving to Episode 9
+2024-11-08 00:18:27,386 WARNING:Episode 9 - Incomplete data. Skipping training.
+2024-11-08 00:18:27,386 INFO:Moving to Episode 10
+2024-11-08 00:19:04,223 WARNING:Episode 10 - Incomplete data. Skipping training.
+2024-11-08 00:19:04,224 INFO:Moving to Episode 11
+2024-11-08 00:19:46,305 WARNING:Episode 11 - Incomplete data. Skipping training.
+2024-11-08 00:19:46,305 INFO:Moving to Episode 12
+2024-11-08 00:20:34,967 WARNING:Episode 12 - Incomplete data. Skipping training.
+2024-11-08 00:20:34,968 INFO:Moving to Episode 13
+2024-11-08 00:21:09,399 WARNING:Episode 13 - Incomplete data. Skipping training.
+2024-11-08 00:21:09,399 INFO:Moving to Episode 14
+2024-11-08 00:22:10,564 WARNING:Episode 14 - Incomplete data. Skipping training.
+2024-11-08 00:22:10,565 INFO:Moving to Episode 15
+2024-11-08 00:22:35,047 WARNING:Episode 15 - Incomplete data. Skipping training.
+2024-11-08 00:22:35,047 INFO:Moving to Episode 16
+2024-11-08 00:23:08,052 WARNING:Episode 16 - Incomplete data. Skipping training.
+2024-11-08 00:23:08,053 INFO:Moving to Episode 17
+2024-11-08 00:23:23,652 WARNING:Episode 17 - Incomplete data. Skipping training.
+2024-11-08 00:23:23,653 INFO:Moving to Episode 18
+2024-11-08 00:24:47,410 WARNING:Episode 18 - Incomplete data. Skipping training.
+2024-11-08 00:24:47,411 INFO:Moving to Episode 19
+2024-11-08 00:25:22,934 WARNING:Episode 19 - Incomplete data. Skipping training.
+2024-11-08 00:25:22,935 INFO:Moving to Episode 20
+2024-11-08 00:26:20,520 WARNING:Episode 20 - Incomplete data. Skipping training.
+2024-11-08 00:26:20,521 INFO:Moving to Episode 21
+2024-11-08 00:26:55,180 WARNING:Episode 21 - Incomplete data. Skipping training.
+2024-11-08 00:26:55,181 INFO:Moving to Episode 22
+2024-11-08 00:27:44,840 WARNING:Episode 22 - Incomplete data. Skipping training.
+2024-11-08 00:27:44,841 INFO:Moving to Episode 23
+2024-11-08 00:28:17,025 WARNING:Episode 23 - Incomplete data. Skipping training.
+2024-11-08 00:28:17,026 INFO:Moving to Episode 24
+2024-11-08 00:28:48,092 WARNING:Episode 24 - Incomplete data. Skipping training.
+2024-11-08 00:28:48,093 INFO:Moving to Episode 25
+2024-11-08 00:29:23,100 WARNING:Episode 25 - Incomplete data. Skipping training.
+2024-11-08 00:29:23,101 INFO:Moving to Episode 26
+2024-11-08 00:30:01,325 WARNING:Episode 26 - Incomplete data. Skipping training.
+2024-11-08 00:30:01,326 INFO:Moving to Episode 27
+2024-11-08 00:30:43,342 WARNING:Episode 27 - Incomplete data. Skipping training.
+2024-11-08 00:30:43,342 INFO:Moving to Episode 28
+2024-11-08 00:31:09,072 WARNING:Episode 28 - Incomplete data. Skipping training.
+2024-11-08 00:31:09,072 INFO:Moving to Episode 29
+2024-11-08 00:31:44,623 WARNING:Episode 29 - Incomplete data. Skipping training.
+2024-11-08 00:31:44,624 INFO:Moving to Episode 30
+2024-11-08 00:32:16,926 WARNING:Episode 30 - Incomplete data. Skipping training.
+2024-11-08 00:32:16,927 INFO:Moving to Episode 31
+2024-11-08 00:32:40,748 WARNING:Episode 31 - Incomplete data. Skipping training.
+2024-11-08 00:32:40,748 INFO:Moving to Episode 32
+2024-11-08 00:33:04,217 WARNING:Episode 32 - Incomplete data. Skipping training.
+2024-11-08 00:33:04,218 INFO:Moving to Episode 33
+2024-11-08 00:33:26,587 WARNING:Episode 33 - Incomplete data. Skipping training.
+2024-11-08 00:33:26,588 INFO:Moving to Episode 34
+2024-11-08 00:34:16,922 WARNING:Episode 34 - Incomplete data. Skipping training.
+2024-11-08 00:34:16,923 INFO:Moving to Episode 35
+2024-11-08 00:34:44,255 WARNING:Episode 35 - Incomplete data. Skipping training.
+2024-11-08 00:34:44,256 INFO:Moving to Episode 36
+2024-11-08 00:34:59,732 WARNING:Episode 36 - Incomplete data. Skipping training.
+2024-11-08 00:34:59,733 INFO:Moving to Episode 37
+2024-11-08 00:35:47,984 WARNING:Episode 37 - Incomplete data. Skipping training.
+2024-11-08 00:35:47,985 INFO:Moving to Episode 38
+2024-11-08 00:36:18,951 WARNING:Episode 38 - Incomplete data. Skipping training.
+2024-11-08 00:36:18,952 INFO:Moving to Episode 39
+2024-11-08 00:36:56,230 WARNING:Episode 39 - Incomplete data. Skipping training.
+2024-11-08 00:36:56,230 INFO:Moving to Episode 40
+2024-11-08 00:37:11,300 WARNING:Episode 40 - Incomplete data. Skipping training.
+2024-11-08 00:37:11,300 INFO:Moving to Episode 41
+2024-11-08 00:37:41,043 WARNING:Episode 41 - Incomplete data. Skipping training.
+2024-11-08 00:37:41,043 INFO:Moving to Episode 42
+2024-11-08 00:38:30,410 WARNING:Episode 42 - Incomplete data. Skipping training.
+2024-11-08 00:38:30,410 INFO:Moving to Episode 43
+2024-11-08 00:39:09,343 WARNING:Episode 43 - Incomplete data. Skipping training.
+2024-11-08 00:39:09,343 INFO:Moving to Episode 44
+2024-11-08 00:39:30,941 WARNING:Episode 44 - Incomplete data. Skipping training.
+2024-11-08 00:39:30,942 INFO:Moving to Episode 45
+2024-11-08 00:40:03,683 WARNING:Episode 45 - Incomplete data. Skipping training.
+2024-11-08 00:40:03,684 INFO:Moving to Episode 46
+2024-11-08 00:40:31,718 WARNING:Episode 46 - Incomplete data. Skipping training.
+2024-11-08 00:40:31,718 INFO:Moving to Episode 47
+2024-11-08 00:41:10,898 WARNING:Episode 47 - Incomplete data. Skipping training.
+2024-11-08 00:41:10,899 INFO:Moving to Episode 48
+2024-11-08 00:42:02,148 WARNING:Episode 48 - Incomplete data. Skipping training.
+2024-11-08 00:42:02,148 INFO:Moving to Episode 49
+2024-11-08 00:42:25,645 WARNING:Episode 49 - Incomplete data. Skipping training.
+2024-11-08 00:42:25,646 INFO:Moving to Episode 50
+2024-11-08 00:42:56,316 WARNING:Episode 50 - Incomplete data. Skipping training.
+2024-11-08 00:42:56,316 INFO:Moving to Episode 51
+2024-11-08 00:43:32,656 WARNING:Episode 51 - Incomplete data. Skipping training.
+2024-11-08 00:43:32,656 INFO:Moving to Episode 52
+2024-11-08 00:44:07,483 WARNING:Episode 52 - Incomplete data. Skipping training.
+2024-11-08 00:44:07,483 INFO:Moving to Episode 53
+2024-11-08 00:44:36,453 WARNING:Episode 53 - Incomplete data. Skipping training.
+2024-11-08 00:44:36,453 INFO:Moving to Episode 54
+2024-11-08 00:45:29,937 WARNING:Episode 54 - Incomplete data. Skipping training.
+2024-11-08 00:45:29,938 INFO:Moving to Episode 55
+2024-11-08 00:46:19,775 WARNING:Episode 55 - Incomplete data. Skipping training.
+2024-11-08 00:46:19,776 INFO:Moving to Episode 56
+2024-11-08 00:46:59,101 WARNING:Episode 56 - Incomplete data. Skipping training.
+2024-11-08 00:46:59,101 INFO:Moving to Episode 57
+2024-11-08 00:47:29,110 WARNING:Episode 57 - Incomplete data. Skipping training.
+2024-11-08 00:47:29,110 INFO:Moving to Episode 58
+2024-11-08 00:47:50,266 WARNING:Episode 58 - Incomplete data. Skipping training.
+2024-11-08 00:47:50,266 INFO:Moving to Episode 59
+2024-11-08 00:48:28,753 WARNING:Episode 59 - Incomplete data. Skipping training.
+2024-11-08 00:48:28,754 INFO:Moving to Episode 60
+2024-11-08 00:48:44,775 WARNING:Episode 60 - Incomplete data. Skipping training.
+2024-11-08 00:48:44,775 INFO:Moving to Episode 61
+2024-11-08 00:49:21,149 WARNING:Episode 61 - Incomplete data. Skipping training.
+2024-11-08 00:49:21,150 INFO:Moving to Episode 62
+2024-11-08 00:50:01,797 WARNING:Episode 62 - Incomplete data. Skipping training.
+2024-11-08 00:50:01,798 INFO:Moving to Episode 63
+2024-11-08 00:50:23,934 WARNING:Episode 63 - Incomplete data. Skipping training.
+2024-11-08 00:50:23,935 INFO:Moving to Episode 64
+2024-11-08 00:50:59,624 WARNING:Episode 64 - Incomplete data. Skipping training.
+2024-11-08 00:50:59,624 INFO:Moving to Episode 65
+2024-11-08 00:51:19,153 WARNING:Episode 65 - Incomplete data. Skipping training.
+2024-11-08 00:51:19,154 INFO:Moving to Episode 66
+2024-11-08 00:52:10,970 WARNING:Episode 66 - Incomplete data. Skipping training.
+2024-11-08 00:52:10,971 INFO:Moving to Episode 67
+2024-11-08 00:52:44,307 WARNING:Episode 67 - Incomplete data. Skipping training.
+2024-11-08 00:52:44,308 INFO:Moving to Episode 68
+2024-11-08 00:53:24,659 WARNING:Episode 68 - Incomplete data. Skipping training.
+2024-11-08 00:53:24,659 INFO:Moving to Episode 69
+2024-11-08 00:54:10,518 WARNING:Episode 69 - Incomplete data. Skipping training.
+2024-11-08 00:54:10,519 INFO:Moving to Episode 70
+2024-11-08 00:55:35,013 WARNING:Episode 70 - Incomplete data. Skipping training.
+2024-11-08 00:55:35,014 INFO:Moving to Episode 71
+2024-11-08 00:56:01,336 WARNING:Episode 71 - Incomplete data. Skipping training.
+2024-11-08 00:56:01,337 INFO:Moving to Episode 72
+2024-11-08 00:56:25,058 WARNING:Episode 72 - Incomplete data. Skipping training.
+2024-11-08 00:56:25,059 INFO:Moving to Episode 73
+2024-11-08 00:56:47,107 WARNING:Episode 73 - Incomplete data. Skipping training.
+2024-11-08 00:56:47,108 INFO:Moving to Episode 74
+2024-11-08 00:57:14,404 WARNING:Episode 74 - Incomplete data. Skipping training.
+2024-11-08 00:57:14,404 INFO:Moving to Episode 75
+2024-11-08 00:57:48,950 WARNING:Episode 75 - Incomplete data. Skipping training.
+2024-11-08 00:57:48,951 INFO:Moving to Episode 76
+2024-11-08 00:58:13,515 WARNING:Episode 76 - Incomplete data. Skipping training.
+2024-11-08 00:58:13,516 INFO:Moving to Episode 77
+2024-11-08 00:58:34,640 WARNING:Episode 77 - Incomplete data. Skipping training.
+2024-11-08 00:58:34,640 INFO:Moving to Episode 78
+2024-11-08 00:59:18,994 WARNING:Episode 78 - Incomplete data. Skipping training.
+2024-11-08 00:59:18,994 INFO:Moving to Episode 79
+2024-11-08 01:00:03,938 WARNING:Episode 79 - Incomplete data. Skipping training.
+2024-11-08 01:00:03,939 INFO:Moving to Episode 80
+2024-11-08 01:00:36,727 WARNING:Episode 80 - Incomplete data. Skipping training.
+2024-11-08 01:00:36,727 INFO:Moving to Episode 81
+2024-11-08 01:01:02,147 WARNING:Episode 81 - Incomplete data. Skipping training.
+2024-11-08 01:01:02,147 INFO:Moving to Episode 82
+2024-11-08 01:01:38,622 WARNING:Episode 82 - Incomplete data. Skipping training.
+2024-11-08 01:01:38,622 INFO:Moving to Episode 83
+2024-11-08 01:02:11,325 WARNING:Episode 83 - Incomplete data. Skipping training.
+2024-11-08 01:02:11,326 INFO:Moving to Episode 84
+2024-11-08 01:02:27,838 WARNING:Episode 84 - Incomplete data. Skipping training.
+2024-11-08 01:02:27,838 INFO:Moving to Episode 85
+2024-11-08 01:02:53,715 WARNING:Episode 85 - Incomplete data. Skipping training.
+2024-11-08 01:02:53,715 INFO:Moving to Episode 86
+2024-11-08 01:03:26,302 WARNING:Episode 86 - Incomplete data. Skipping training.
+2024-11-08 01:03:26,303 INFO:Moving to Episode 87
+2024-11-08 01:04:19,518 WARNING:Episode 87 - Incomplete data. Skipping training.
+2024-11-08 01:04:19,519 INFO:Moving to Episode 88
+2024-11-08 01:04:40,536 WARNING:Episode 88 - Incomplete data. Skipping training.
+2024-11-08 01:04:40,536 INFO:Moving to Episode 89
+2024-11-08 01:05:29,368 WARNING:Episode 89 - Incomplete data. Skipping training.
+2024-11-08 01:05:29,368 INFO:Moving to Episode 90
+2024-11-08 01:05:47,953 WARNING:Episode 90 - Incomplete data. Skipping training.
+2024-11-08 01:05:47,953 INFO:Moving to Episode 91
+2024-11-08 01:06:10,332 WARNING:Episode 91 - Incomplete data. Skipping training.
+2024-11-08 01:06:10,332 INFO:Moving to Episode 92
+2024-11-08 01:07:03,818 WARNING:Episode 92 - Incomplete data. Skipping training.
+2024-11-08 01:07:03,819 INFO:Moving to Episode 93
+2024-11-08 01:08:01,110 WARNING:Episode 93 - Incomplete data. Skipping training.
+2024-11-08 01:08:01,111 INFO:Moving to Episode 94
+2024-11-08 01:08:27,166 WARNING:Episode 94 - Incomplete data. Skipping training.
+2024-11-08 01:08:27,167 INFO:Moving to Episode 95
+2024-11-08 01:09:04,036 WARNING:Episode 95 - Incomplete data. Skipping training.
+2024-11-08 01:09:04,036 INFO:Moving to Episode 96
+2024-11-08 01:09:52,407 WARNING:Episode 96 - Incomplete data. Skipping training.
+2024-11-08 01:09:52,407 INFO:Moving to Episode 97
+2024-11-08 01:10:33,826 WARNING:Episode 97 - Incomplete data. Skipping training.
+2024-11-08 01:10:33,827 INFO:Moving to Episode 98
+2024-11-08 01:11:18,487 WARNING:Episode 98 - Incomplete data. Skipping training.
+2024-11-08 01:11:18,488 INFO:Moving to Episode 99
+2024-11-08 01:11:55,435 WARNING:Episode 99 - Incomplete data. Skipping training.
+2024-11-08 01:11:55,462 INFO:[CHECKPOINT] Model and optimizer states saved at Episode 100.
+2024-11-08 01:11:55,462 INFO:[DEBUG] Completed 100 episodes in 3615.94 seconds.
+2024-11-08 01:11:55,463 INFO:Moving to Episode 100
+2024-11-08 01:11:55,463 INFO:Simulation finished.
+2024-11-08 01:11:55,488 INFO:[SAVE] Final model saved to alphazero_model_final.pth.
