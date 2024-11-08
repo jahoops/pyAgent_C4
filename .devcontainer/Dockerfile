@@ -4,11 +4,10 @@ FROM python:3.9-slim
 # Upgrade pip and install all Python dependencies in a single layer
 RUN apt-get update && apt-get install -y net-tools && \
     pip install --upgrade pip && \
-    pip install deap numpy pygame pymunk debugpy torch torchvision \
-    pip install --upgrade pip && pip install -r requirements.txt
+    pip install deap numpy pygame pymunk debugpy torch torchvision
 
 ARG FOLDER_NAME=pyAgent_C4
-ARG SCRIPT_NAME=train_alphazero.py
+ARG SCRIPT_NAME=review_game.py
 
 ENV FOLDER_NAME=${FOLDER_NAME}
 ENV SCRIPT_NAME=${SCRIPT_NAME}

@@ -6,6 +6,7 @@ import numpy as np
 import copy
 import logging
 from connect4 import Connect4, Connect4Net  # Correct imports
+from torch.utils.data import DataLoader  # Add DataLoader import
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
@@ -86,6 +87,27 @@ class AlphaZeroAgent:
         return board_tensor
 
     def act(self, state, env, num_simulations=800):
+        # Perform MCTS simulations
+        actions, probabilities = self.mcts_simulate(state, env, num_simulations)
+
+        # Create action_probs array with zeros
+        action_probs = [0.0] * self.action_dim
+
+        # Assign probabilities to the corresponding actions
+        for action, probability in zip(actions, probabilities):
+            action_probs[action] = probability
+
+        # Select the action
+        if self.temperature == 0:
+            # Greedy action selection
+            selected_action = actions[np.argmax(probabilities)]
+        else:
+            # Stochastic action selection
+            selected_action = np.random.choice(actions, p=probabilities)
+
+        return selected_action, action_probs
+
+    def mcts_simulate(self, state, env, num_simulations=800):
         root = MCTSNode(env.clone())
         #logger.debug("Starting MCTS simulations.")
 
@@ -165,44 +187,41 @@ class AlphaZeroAgent:
         visit_counts = np.array([child.visit_count for child in root.children.values()])
         actions = list(root.children.keys())
 
-        if len(actions) == 0:
-            logger.error("No actions available to select. Returning default action.")
-            return -1  # Or handle appropriately
+        # Check if there are available actions
+        if not actions:
+            logger.error("No actions available after MCTS. Returning default values.")
+            # Return default values or handle the error appropriately
+            return [], []
 
-        if visit_counts.sum() > 0:
-            visit_counts = visit_counts / visit_counts.sum()
-        else:
-            if len(actions) > 0:
-                visit_counts = np.array([1.0 / len(actions)] * len(actions))
-            else:
-                visit_counts = np.array([])
+        # Normalize visit counts to get probabilities
+        total_counts = np.sum(visit_counts)
+        probabilities = visit_counts / total_counts if total_counts > 0 else np.zeros_like(visit_counts)
 
-        if len(actions) == 0:
-            logger.error("No actions available after normalization. Cannot select an action.")
-            return -1  # Or handle appropriately
-
-        if self.temperature == 0:
-            best_action = actions[np.argmax(visit_counts)]
-            return best_action, visit_counts  # Return both action and visit_counts
-        else:
-            chosen_action = np.random.choice(actions, p=visit_counts)
-            return chosen_action, visit_counts
+        return actions, probabilities
 
     def train(self, states, mcts_probs, values):
-        self.model.train()
+        # Convert lists to tensors
+        states = torch.tensor(states, dtype=torch.float32)  # Shape: [batch_size, 6, 7]
+        mcts_probs = torch.tensor(mcts_probs, dtype=torch.float32)
+        values = torch.tensor(values, dtype=torch.float32)
+
+        # Add channel dimension to states
+        states = states.unsqueeze(1)  # Now shape: [batch_size, 1, 6, 7]
+
+        # Move data to the appropriate device
+        states = states.to(self.device)
+        mcts_probs = mcts_probs.to(self.device)
+        values = values.to(self.device)
+
+        # Forward pass
+        log_policy, predicted_values = self.model(states)
+
+        # Compute losses
+        policy_loss = -torch.mean(torch.sum(mcts_probs * log_policy, dim=1))
+        value_loss = torch.mean((predicted_values.squeeze() - values) ** 2)
+        total_loss = policy_loss + value_loss
+
+        # Backward pass and optimization
         self.optimizer.zero_grad()
-        state_tensors = torch.FloatTensor(np.array(states)).unsqueeze(1).to(self.device)  # [batch_size, 1, 6, 7]
-        mcts_probs = torch.FloatTensor(np.array(mcts_probs)).to(self.device)  # [batch_size, action_dim]
-        values = torch.FloatTensor(values).unsqueeze(1).to(self.device)  # [batch_size, 1]
-
-        log_policy_preds, value_preds = self.model(state_tensors)
-
-        # Policy Loss
-        policy_loss = -torch.mean(torch.sum(mcts_probs * log_policy_preds, dim=1))
-        # Value Loss
-        value_loss = nn.MSELoss()(value_preds, values)
-        # Total Loss
-        loss = policy_loss + value_loss
-
-        loss.backward()
+        total_loss.backward()
         self.optimizer.step()

@@ -6,25 +6,29 @@ import torch.nn.functional as F
 
 class Connect4:
     def __init__(self):
-        self.board = np.zeros((6, 7), dtype=int)  # 6 rows, 7 columns
+        self.rows = 6
+        self.columns = 7
+        self.board = np.zeros((self.rows, self.columns), dtype=np.int8)
         self.current_player = 1  # Player 1 starts
 
     def reset(self):
-        self.board = np.zeros((6, 7), dtype=int)
+        self.board = np.zeros((self.rows, self.columns), dtype=int)
         self.current_player = 1
         return self
 
-    def make_move(self, action):
+    def make_move(self, action, player_marker=None):
         """
         Makes a move in the specified column (action).
         Returns True if the move is valid, False otherwise.
         """
-        if action < 0 or action >= 7:
+        if action < 0 or action >= self.columns:
             return False  # Invalid column
 
-        for row in reversed(range(6)):
+        for row in reversed(range(self.rows)):
             if self.board[row][action] == 0:
-                self.board[row][action] = self.current_player
+                if player_marker is None:
+                    player_marker = self.current_player
+                self.board[row][action] = player_marker
                 self.current_player = 3 - self.current_player  # Switch player
                 return True
         return False  # Column is full
@@ -33,13 +37,13 @@ class Connect4:
         """
         Returns a list of valid columns where a move can be made.
         """
-        return [c for c in range(7) if self.board[0][c] == 0]
+        return [c for c in range(self.columns) if self.board[0][c] == 0]
 
     def is_full(self):
         """
         Checks if the board is full.
         """
-        return np.all(self.board != 0)
+        return not any(self.board[0][c] == 0 for c in range(self.columns))
 
     def check_winner(self):
         """
@@ -47,29 +51,29 @@ class Connect4:
         Returns the player number if there's a winner, 0 otherwise.
         """
         # Check horizontal locations for win
-        for row in range(6):
-            for col in range(7 - 3):
+        for row in range(self.rows):
+            for col in range(self.columns - 3):
                 if (self.board[row][col] == self.board[row][col + 1] ==
                     self.board[row][col + 2] == self.board[row][col + 3] != 0):
                     return self.board[row][col]
 
         # Check vertical locations for win
-        for col in range(7):
-            for row in range(6 - 3):
+        for col in range(self.columns):
+            for row in range(self.rows - 3):
                 if (self.board[row][col] == self.board[row + 1][col] ==
                     self.board[row + 2][col] == self.board[row + 3][col] != 0):
                     return self.board[row][col]
 
         # Check positively sloped diagonals
-        for row in range(6 - 3):
-            for col in range(7 - 3):
+        for row in range(self.rows - 3):
+            for col in range(self.columns - 3):
                 if (self.board[row][col] == self.board[row + 1][col + 1] ==
                     self.board[row + 2][col + 2] == self.board[row + 3][col + 3] != 0):
                     return self.board[row][col]
 
         # Check negatively sloped diagonals
-        for row in range(3, 6):
-            for col in range(7 - 3):
+        for row in range(3, self.rows):
+            for col in range(self.columns - 3):
                 if (self.board[row][col] == self.board[row - 1][col + 1] ==
                     self.board[row - 2][col + 2] == self.board[row - 3][col + 3] != 0):
                     return self.board[row][col]
@@ -102,10 +106,13 @@ class Connect4:
         """
         Creates a deep copy of the game environment.
         """
-        new_env = Connect4()
-        new_env.board = self.board.copy()
-        new_env.current_player = self.current_player
-        return new_env
+        cloned_env = Connect4()
+        cloned_env.board = self.board.copy()
+        cloned_env.current_player = self.current_player
+        return cloned_env
+
+    def get_action_space_size(self):
+        return self.columns
 
 class ResidualBlock(nn.Module):
     def __init__(self, channels):

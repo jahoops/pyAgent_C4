@@ -1,6 +1,7 @@
 # q_learning_agent.py
 import numpy as np
 import random
+from connect4 import Connect4  # Ensure this import matches your project structure
 
 class QLearningAgent:
     def __init__(self):
@@ -9,6 +10,9 @@ class QLearningAgent:
         self.gamma = 0.9  # Discount factor
 
     def get_state_key(self, state):
+        # Ensure state is a NumPy array
+        if isinstance(state, Connect4):
+            state = state.board
         return tuple(state.flatten())
 
     def choose_action(self, state, epsilon=0.1):

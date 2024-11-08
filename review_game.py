@@ -2,6 +2,7 @@
 import pygame
 import pickle
 import time
+import random
 
 # Constants
 WINDOW_WIDTH = 700
@@ -16,18 +17,31 @@ DELAY_BETWEEN_GAMES = 5  # Seconds between games
 # Colors
 BACKGROUND_COLOR = (0, 0, 0)
 EMPTY_COLOR = (255, 255, 255)
-AGENT1_COLOR = (255, 0, 0)
-AGENT2_COLOR = (0, 0, 255)
+
+# Agent colors (consistent with markers assigned in evaluate_agents_q_vs_dqn.py)
+AGENT_COLORS = {
+    "Q-Learning Agent": (255, 0, 0),      # Red
+    "DQN Agent": (0, 255, 0),             # Green
+    "AlphaZero Agent": (0, 0, 255),       # Blue
+}
 
 def draw_board(screen, board):
     screen.fill(BACKGROUND_COLOR)
     for row in range(BOARD_ROWS):
         for col in range(BOARD_COLS):
-            color = EMPTY_COLOR
-            if board[row][col] == 1:
-                color = AGENT1_COLOR
-            elif board[row][col] == 2:
-                color = AGENT2_COLOR
+            marker = board[row][col]
+            if marker == 0:
+                color = EMPTY_COLOR
+            else:
+                # Map marker to color
+                color = None
+                for agent_name, agent_marker in AGENT_MARKERS.items():
+                    if marker == agent_marker:
+                        color = AGENT_COLORS[agent_name]
+                        break
+                if color is None:
+                    color = EMPTY_COLOR  # Default to empty if marker not recognized
+
             pygame.draw.circle(screen, color, (
                 col * (CIRCLE_RADIUS * 2 + CIRCLE_PADDING) + CIRCLE_RADIUS + CIRCLE_PADDING,
                 row * (CIRCLE_RADIUS * 2 + CIRCLE_PADDING) + CIRCLE_RADIUS + CIRCLE_PADDING
@@ -35,24 +49,37 @@ def draw_board(screen, board):
     pygame.display.flip()
 
 def review_games():
-    with open("random_games.pkl", "rb") as f:
-        games = pickle.load(f)
+    with open("alphazero_vs_q_games.pkl", "rb") as f:
+        all_games = pickle.load(f)
+
+    # Create a reverse mapping from marker to agent name
+    global AGENT_MARKERS
+    AGENT_MARKERS = {
+        "Q-Learning Agent": 1,
+        "DQN Agent": 2,
+        "AlphaZero Agent": 3
+    }
 
     pygame.init()
     screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     pygame.display.set_caption("Connect 4 Game Review")
     clock = pygame.time.Clock()
 
-    for game in games:
+    # Randomly shuffle the games
+    random.shuffle(all_games)
+
+    for game in all_games:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                return
+
         for move in game:
-            agent, action, board = move
+            agent_name, action, board = move
             draw_board(screen, board)
             time.sleep(1)  # Wait for 1 second between moves
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    return
-        time.sleep(DELAY_BETWEEN_GAMES)  # Wait for 5 seconds between games
+
+        time.sleep(DELAY_BETWEEN_GAMES)  # Wait between games
 
     pygame.quit()
 

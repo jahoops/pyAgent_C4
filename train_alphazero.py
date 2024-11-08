@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 # train_alphazero.py
 
-def simulate_game(agent, time_limit, checkpoint_interval=10):
+def simulate_game(agent, time_limit, action_dim, checkpoint_interval=10):
     try:
         logger.info("Simulation started.")
         start_time = time.time()
@@ -27,39 +27,53 @@ def simulate_game(agent, time_limit, checkpoint_interval=10):
 
             while not done:
                 # Agent's Turn
-                action, action_probs = agent.act(state, env, num_simulations=800)
-                if action == -1:
-                    logger.error("Agent returned an invalid action.")
+                action, action_probs = agent.act(state, env, num_simulations=1000)
+
+                # Validate action_probs length
+                if len(action_probs) != action_dim:
+                    logger.error(
+                        f"action_probs length {len(action_probs)} does not match action_dim {action_dim}."
+                    )
                     break
 
+                # Validate action
                 legal_moves = env.get_legal_moves()
                 if action not in legal_moves:
                     logger.error(f"Agent selected an illegal move: {action}")
                     break
 
+                # Make the move
                 env.make_move(action)
                 states.append(state.copy())
-
-                # Placeholder: Assigning uniform probabilities; replace with actual MCTS probabilities
-                action_probs = [0] * agent.action_dim
-                action_probs[action] = 1.0
                 mcts_probs.append(action_probs)
+                values.append(0)  # Placeholder; update with actual game result later
 
                 # Check for game end
                 winner_id = env.check_winner()
                 if winner_id != 0:
                     done = True
-                    result = env.game_result()  # Correctly call game_result on env
-                    values = [result for _ in states]  # Assign to all states
+                    result = env.game_result()
+                    values = [result for _ in states]  # Update all values
                 elif env.is_full():
                     done = True
                     result = 0  # Draw
-                    values = [result for _ in states]  # Assign to all states
+                    values = [result for _ in states]  # Update all values
 
+                # Update state
                 state = env.board.copy()
 
-            # Train the agent with the collected data
+            # Check consistency before training
             if len(states) == len(mcts_probs) == len(values) > 0:
+                # Convert to arrays
+                states = torch.tensor(states, dtype=torch.float32)
+                mcts_probs = torch.tensor(mcts_probs, dtype=torch.float32)
+                values = torch.tensor(values, dtype=torch.float32)
+
+                print(f"states shape: {states.shape}")
+                print(f"mcts_probs shape: {mcts_probs.shape}")
+                print(f"values shape: {values.shape}")
+
+                # Train the agent
                 agent.train(states, mcts_probs, values)
                 logger.info(f"Trained on Episode {episode + 1}")
             else:
@@ -75,16 +89,10 @@ def simulate_game(agent, time_limit, checkpoint_interval=10):
                 }, checkpoint_path)
                 logger.info(f"[SAVE] Checkpoint saved to {checkpoint_path}")
 
-            # Periodic Logging
-            if (episode + 1) % 100 == 0:
-                logger.info(f"Completed {episode + 1} episodes.")
-
             episode += 1
             logger.info(f"Moving to Episode {episode}")
 
         logger.info("Simulation finished.")
-    except KeyboardInterrupt:
-        logger.info("\n[INFO] Training interrupted by user.")
     except Exception as e:
         logger.error(f"Simulation encountered an error: {e}")
     finally:
@@ -119,7 +127,7 @@ def train_alphazero(time_limit=1*60*60, load_model=True, checkpoint_path=None):
             except FileNotFoundError:
                 logger.warning("alphazero_model_final.pth not found. Starting training from scratch.")
 
-    simulate_game(agent, time_limit)
+    simulate_game(agent, time_limit, action_dim)
 
 if __name__ == "__main__":
     # Example usage:
